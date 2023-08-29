@@ -10,6 +10,18 @@ class ReportStatus(BaseModel):
     status: str
     progress: int
 
+# Demo functions
+@app.get("/")
+def read_root():
+    return {"Hello": "World"}
+
+@app.get("/items/{item_id}")
+def read_item(item_id: int, q = []):
+    q.append(item_id)
+    return {"item_id": item_id, "q": q}
+
+
+# Work in Progress.
 @app.post("/start_report/", response_model=ReportStatus)
 async def start_report():
     # Check if there's an existing report task running
@@ -17,7 +29,7 @@ async def start_report():
         return {"status": "Report task already running"}
 
     # Run the get_report task asynchronously
-    start_report.report_task = asyncio.ensure_future(run_get_report())
+    # start_report.report_task = asyncio.ensure_future(run_get_report())
     return {"status": "Report task started"}
 
 
