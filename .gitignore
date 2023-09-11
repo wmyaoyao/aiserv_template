@@ -1,2 +1,5 @@
 drafts/
 csv/
+__pycache__/
+
+*.csv
